@@ -1,6 +1,8 @@
 import json
 
 
+
+
 def generate_diff(data1, data2):
     file1 = {k: str(v).lower() if isinstance(v, bool)
              else v for k, v in json.load(open(data1)).items()}
