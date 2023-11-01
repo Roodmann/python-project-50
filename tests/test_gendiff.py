@@ -2,20 +2,44 @@ import pytest
 from gendiff import generate_diff
 
 
-file1 = ("tests/fixtures/file1.json")
-file2 = ("tests/fixtures/file2.json")
-file1yaml = ("tests/fixtures/file1.yml")
-file2yaml = ("tests/fixtures/file2.yml")
-with open("tests/fixtures/result") as file:
-    expected = file.read()
-
-
 @pytest.mark.parametrize(
-    "file_1, file_2",
+    "file_1, file_2, format, result",
     [
-        (file1, file2),
-        (file1yaml, file2yaml),
+        #  test plain nested
+        (
+            "tests/fixtures/file_nested1.json",
+            "tests/fixtures/file_nested2.json",
+            'plain', 
+            "tests/fixtures/plain_result",
+        ),
+
+        #  test plain flat
+        (
+            "tests/fixtures/file1.json",
+            "tests/fixtures/file2.json",
+            "plain",
+            "tests/fixtures/flat_plain_result",
+        ),
+
+        #  test stylish nested
+        (
+            "tests/fixtures/file_nested1.json",
+            "tests/fixtures/file_nested2.json",
+            "stylish",
+            "tests/fixtures/stylish_result", 
+        ),
+        #  test stylish flat
+        (
+            "tests/fixtures/file1.json",
+            "tests/fixtures/file2.json",
+            "stylish",
+            "tests/fixtures/result",
+        ),
     ]
 )
-def test_generate_diff(file_1, file_2):
-    assert generate_diff(file_1, file_2) == expected
+
+
+def test_generate_diff(file_1, file_2, format, result):
+    with open(result) as file:
+        expected = file.read()
+        assert generate_diff(file_1, file_2, format) == expected

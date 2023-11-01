@@ -1,29 +1,10 @@
 #!/usr/bin/env python
-
-import argparse
-from gendiff import generate_diff
+from gendiff import generate_diff, arg_parser
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='Compares two configuration'
-                    'files and shows a difference.'
-                    )
-    # Positional arguments
-    parser.add_argument("first_file", type=str,
-                        help="Absolute path to your file"
-                        )
-    parser.add_argument("second_file", type=str,
-                        help="Absolute path to your file"
-                        )
-
-    # Optional arguments
-    parser.add_argument('-f', '--format',
-                        help='set format of output',
-                        default="stylish"
-                        )
-    args = parser.parse_args()
-    print(generate_diff(args.first_file, args.second_file))
+    file_one, file_two, format_name = arg_parser()
+    print(generate_diff(file_one, file_two, format_name))
 
 
 if __name__ == '__main__':
