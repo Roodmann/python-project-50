@@ -54,7 +54,7 @@ def format_stylish(diff):
 
 def format_diff(diff, depth):
     lines = []
-
+    
     for elem in diff:
         if isinstance(elem, dict):
             lines.append(make_line(elem, depth))

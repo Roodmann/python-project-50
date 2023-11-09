@@ -5,5 +5,24 @@
 [![Python CI](https://github.com/Roodmann/python-project-50/actions/workflows/pyci.yml/badge.svg)](https://github.com/Roodmann/python-project-50/actions/workflows/pyci.yml)
 
 
+
+
+# **Gendiff** - compare two json and/or yaml files
+This utility calculate differences between 2 files in json or yaml format. Differences can be represented by 3 formats.
+
+## Description
+
+- stylish format. Shows all keys and values ​​from the first and      second files, the status of the key is marked with a plus or minus, depending on whether it was added or removed. 
+- plain format. Data about keys and their status is displayed as strings. If the key is not modified in any way, the nested keys are displayed as '[complex value]'.
+- json format. Difference between two files is shown by json format
+
+
+## System requirements
+
+- Python (3.10)
+- Poetry
+- GIT
+- Pyyaml (6.0.1)
 ### Get diffrence between two json files
+
 [Demonstration](https://asciinema.org/a/qDgGUfPEGNTQflKTUQZNsvyir)

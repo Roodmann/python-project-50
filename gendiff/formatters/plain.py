@@ -11,14 +11,14 @@ def format_plain(diff_line):
             lines.append(f"Property '{'.'.join(patch)}' was removed")
 
         elif status == 'added':
-            new_value = is_value(diff.get('new_value'))
+            new_value = transforms_value(diff.get('new_value'))
             lines.append(f"Property '{'.'.join(patch)}'"
                          f" was added with value: {new_value}"
                          )
 
         elif status == 'updated':
-            old_value = is_value(diff.get('old_value'))
-            new_value = is_value(diff.get('new_value'))
+            old_value = transforms_value(diff.get('old_value'))
+            new_value = transforms_value(diff.get('new_value'))
             lines.append(f"Property '{'.'.join(patch)}'"
                          f" was updated. From {old_value} to {new_value}"
                          )
@@ -31,7 +31,7 @@ def format_plain(diff_line):
     return '\n'.join(lines)
 
 
-def is_value(value):
+def transforms_value(value):
     if isinstance(value, str):
         return f"'{value}'"
 
