@@ -1,18 +1,11 @@
-from copy import deepcopy
-
-#def create_diff(data1, data2):
-
-
-    #for key in keys:
-        ####return diff
 
 
 def get_diff_key(data1, data2):
     keys = sorted(data1.keys() | data2.keys())
     diff = []
-    dict_ = {}
 
     for key in keys:
+        dict_ = {}
         data1_value = data1.get(key)
         data2_value = data2.get(key)
 
@@ -37,5 +30,6 @@ def get_diff_key(data1, data2):
             dict_['status'] = 'updated'
             dict_['old_value'] = data1_value
             dict_['new_value'] = data2_value
+        diff.append(dict_)
 
-    return diff.append(deepcopy(dict_))
+    return diff
