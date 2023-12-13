@@ -1,34 +1,55 @@
 
 
-def format_plain(diff_line):
+def format_plain(diffs):
+    """Преобразует разницу в форматированный текст."""
+
+    def transform_value(value):
+        """Преобразует значения в определенный формат."""
+        if isinstance(value, dict):
+            return '[complex value]'
+        if isinstance(value, str):
+            return f"'{value}'"
+        if value is None:
+            return 'null'
+        return str(value)
+
     lines = []
 
-    def walk(diff, patch):
-        patch += (diff.get('key'),)
-        status = diff.get('status')
+    def walk(diffs, patch=[]):
+        """Рекурсия, формирует соответствующее 
+           действие для каждого элемента.
+        """
+        #  проходиМ по каждому элементу разницы
+        for diff in diffs:
+            status = diff['status']
+            key = diff['key']
 
-        if status == 'removed':
-            lines.append(f"Property '{'.'.join(patch)}' was removed")
+            if status == 'removed':
+                property_path = '.'.join(patch + [key])
+                lines.append(f"Property '{property_path}' was removed")
 
-        elif status == 'added':
-            new_value = transforms_value(diff.get('new_value'))
-            lines.append(f"Property '{'.'.join(patch)}'"
+            elif status == 'added':
+                property_path = '.'.join(patch + [key])
+                new_value = transforms_value(diff['new_value'])
+                lines.append(f"Property '{property_path}'"
                          f" was added with value: {new_value}"
                          )
+            elif status == 'nested':
+                property_path = '.'.join(patch + [key])
+                nested_diffs = diff['nested']
+                walk(nested_diffs, patch=patch + [key])
 
-        elif status == 'updated':
-            old_value = transforms_value(diff.get('old_value'))
-            new_value = transforms_value(diff.get('new_value'))
-            lines.append(f"Property '{'.'.join(patch)}'"
+            elif status == 'updated':
+                property_path = '.'.join(patch + [key])
+                old_value = transforms_value(diff['old_value'])
+                new_value = transforms_value(diff['new_value'])
+                lines.append(f"Property '{property_path}'"
                          f" was updated. From {old_value} to {new_value}"
                          )
 
-        list(map(lambda value: walk(value, patch), diff.get('nested', [])))
-
-    for elem in diff_line:
-        walk(elem, ())
-
+    walk(diffs)
     return '\n'.join(lines)
+    
 
 
 def transforms_value(value):
