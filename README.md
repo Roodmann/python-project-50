@@ -23,6 +23,13 @@ This utility calculate differences between 2 files in json or yaml format. Diffe
 - Poetry
 - GIT
 - Pyyaml (6.0.1)
+
+### Installation
+To install and run the project, you will need Python version 3.10 and higher.
+
+```
+pip install --user git+https://github.com/Roodmann/python-project-50
+```
 ### Get diffrence between two json files
 
 [Demonstration](https://asciinema.org/a/qDgGUfPEGNTQflKTUQZNsvyir)
