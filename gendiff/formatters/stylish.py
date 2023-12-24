@@ -40,7 +40,7 @@ def make_line(diff, depth):
 
 def calculate_value(diff, depth):
     if isinstance(diff, (dict, list)):
-        return format_diff(diff, depth+1)
+        return format_diff(diff, depth + 1)
 
     return str(diff)\
         .replace("True", "true")\

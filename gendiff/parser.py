@@ -4,8 +4,7 @@ import argparse
 def arg_parser():
     parser = argparse.ArgumentParser(
         description='Compares two configuration'
-                    'files and shows a difference.'
-                    )
+                    'files and shows a difference.')
     # Positional arguments
     parser.add_argument("first_file", type=str,
                         help="Absolute path to your file"

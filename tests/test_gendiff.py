@@ -9,7 +9,7 @@ from gendiff import generate_diff
         (
             "tests/fixtures/file_nested1.json",
             "tests/fixtures/file_nested2.json",
-            'plain', 
+            'plain',
             "tests/fixtures/plain_result",
         ),
 
@@ -26,7 +26,7 @@ from gendiff import generate_diff
             "tests/fixtures/file_nested1.json",
             "tests/fixtures/file_nested2.json",
             "stylish",
-            "tests/fixtures/stylish_result", 
+            "tests/fixtures/stylish_result",
         ),
         #  test stylish flat
         (
@@ -37,8 +37,6 @@ from gendiff import generate_diff
         ),
     ]
 )
-
-
 def test_generate_diff(file_1, file_2, format, result):
     with open(result) as file:
         expected = file.read()
