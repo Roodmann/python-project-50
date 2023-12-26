@@ -65,7 +65,7 @@ def format_value(value):
     elif isinstance(value, bool):
         return str(value).lower()
 
-    return str(value)\
-        .replace("True", "true")\
-        .replace('False', 'false')\
-        .replace('None', 'null')
+    elif value is None:
+        value = 'null'
+
+    return str(value)

@@ -39,13 +39,19 @@ def make_line(diff, depth):
 
 
 def calculate_value(diff, depth):
-    if isinstance(diff, (dict, list)):
+    if isinstance(diff, dict):
         return format_diff(diff, depth + 1)
 
-    return str(diff)\
-        .replace("True", "true")\
-        .replace('False', 'false')\
-        .replace('None', 'null')
+    elif isinstance(diff, list):
+        return format_diff(diff, depth + 1)
+
+    elif isinstance(diff, bool):
+        return str(diff).lower()
+
+    elif diff is None:
+        return 'null'
+
+    return str(diff)
 
 
 def format_stylish(diff):
